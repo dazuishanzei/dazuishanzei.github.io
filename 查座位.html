@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>公司40周年年会座位查询</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei";
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 15px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #e63946;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>年会座位号查询</h2>
+    <input type="text" id="nameInput" placeholder="请输入您的姓名">
+    <button onclick="checkSeat()">查询座位号</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const seatData = [
+      "张三|8",
+      "李四|15",
+      "蔡洁|23",
+      "张嘉|22",
+      "郭秘书长|20",
+      // 这里替换成你的400人数据
+    ];
+
+    function checkSeat() {
+      const inputName = document.getElementById("nameInput").value.trim();
+      const resultDiv = document.getElementById("result");
+      
+      if (!inputName) {
+        resultDiv.innerText = "请输入姓名！";
+        return;
+      }
+
+      const match = seatData.find(item => {
+        const [name, seat] = item.split("|");
+        return name.includes(inputName);
+      });
+
+      if (match) {
+        const [name, seat] = match.split("|");
+        resultDiv.innerText = `${name}，您的座位号是：${seat}号桌`;
+      } else {
+        resultDiv.innerText = "未查询到您的座位信息，请联系工作人员！";
+      }
+    }
+  </script>
+</body>
+</html>
